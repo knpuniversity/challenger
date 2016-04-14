@@ -58,6 +58,7 @@ class TestCommand extends Command
 
         $io->title(sprintf('Testing %s challenges', count($challenges)));
         $errors = [];
+        $startTime = time();
         foreach ($challenges as $challenge) {
             $this->testChallenge($challenge, $config);
             if ($challenge->isSuccessful()) {
@@ -67,15 +68,20 @@ class TestCommand extends Command
                 $errors[] = [$challenge->getChallengeKey(), $challenge->getErrorMessage()];
             }
         }
+        $duration = round(time() - $startTime);
+
+        $io->writeln('');
+        $io->note(sprintf('Completed in %s seconds', $duration));
 
         // yay!
         if (empty($errors)) {
-            $sun = '\xF0\x9F\x8C\x9E';
+            $sun = "\xF0\x9F\x8C\x9E";
             $io->success('All challenges were graded successfully! Have a sunny afternoon! '.$sun);
 
             return 0;
         }
 
+        $io->error(sprintf('%s challenges failed!', count($errors)));
         $io->table(['Challenge', 'Error'], $errors);
 
         return 1;
@@ -118,7 +124,7 @@ class TestCommand extends Command
         }
 
         if (!$challenge->isGradeable()) {
-            $challenge->isSuccessful();
+            $challenge->markAsSuccessful();
 
             return;
         }
