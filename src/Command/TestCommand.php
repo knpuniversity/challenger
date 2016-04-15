@@ -139,7 +139,8 @@ class TestCommand extends Command
             'repoUrl' => $config->getRepoUrl(),
             'sha' => $config->getRepoSha(),
             'challengeKey' => $challenge->getChallengeKey(),
-            'shouldBoot' => true
+            'shouldBoot' => true,
+            'isForTesting' => true,
         ];
 
         $response = $this->client->post('/applications?token=' . $config->getChallengeRunnerToken(), [
