@@ -44,9 +44,6 @@ class TestConfig
         if (!empty($missingVars)) {
             throw new MissingEnvVarsException($missingVars);
         }
-
-        echo 'repo_URL: ' . $vars['CHALLENGER_REPO_URL'];
-        echo ' ch_URL: ' . $vars['CHALLENGER_CHALLENGE_RUNNER_URL'];
         
         return new static(
             $vars['CHALLENGER_REPO_URL'],
