@@ -45,6 +45,8 @@ class TestConfig
             throw new MissingEnvVarsException($missingVars);
         }
 
+        echo 'URL: ' . $vars['CHALLENGER_CHALLENGE_RUNNER_URL'];
+        
         return new static(
             $vars['CHALLENGER_REPO_URL'],
             $vars['CHALLENGER_REPO_SHA'],
