@@ -44,7 +44,7 @@ class TestCommand extends Command
             return 1;
         }
 
-        var_dump($config->getChallengeRunnerUrl());
+        var_dump(base64_encode($config->getChallengeRunnerUrl()));
         $this->client = new Client([
             'base_uri' => $config->getChallengeRunnerUrl()
         ]);
